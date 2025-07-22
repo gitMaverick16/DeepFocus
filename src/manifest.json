@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "DeepFocus - Bloqueador de Distracciones",
+  "version": "1.0.0",
+  "description": "Bloquea sitios distractores y muestra mensajes motivacionales para mejorar tu productividad",
+  
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation",
+    "activeTab"
+  ],
+  
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "DeepFocus - Bloquear sitio actual"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["blocked.html", "assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+} 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepFocus</title>
+    <link rel="stylesheet" href="styles/popup.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🎯</span>
+                <h1>DeepFocus</h1>
+            </div>
+            <p class="subtitle">Bloqueador de Distracciones</p>
+        </header>
+
+        <main class="main-content">
+            <div class="current-site">
+                <h2>Sitio Actual</h2>
+                <div class="site-info">
+                    <span class="site-url" id="current-url">Cargando...</span>
+                    <span class="site-status" id="site-status">Verificando...</span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="block-site" class="btn btn-primary">
+                    <span class="btn-icon">🚫</span>
+                    Bloquear Sitio
+                </button>
+                
+                <button id="unblock-site" class="btn btn-secondary" style="display: none;">
+                    <span class="btn-icon">✅</span>
+                    Desbloquear Sitio
+                </button>
+            </div>
+
+            <div class="quick-actions">
+                <button id="open-options" class="btn btn-outline">
+                    <span class="btn-icon">⚙️</span>
+                    Configuración
+                </button>
+                
+                <button id="view-stats" class="btn btn-outline">
+                    <span class="btn-icon">📊</span>
+                    Estadísticas
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p class="motivational-text" id="motivational-text">
+                "Cada minuto que pasas enfocado es una inversión en tu futuro"
+            </p>
+        </footer>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html> 
