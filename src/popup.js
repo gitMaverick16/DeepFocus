@@ -81,9 +81,9 @@ class DeepFocusPopup {
             this.unblockCurrentSite();
         });
 
-        // Botón para abrir opciones (próximamente)
+        // Botón para abrir opciones
         document.getElementById('open-options').addEventListener('click', () => {
-            this.showMessage('Página de configuración próximamente', 'info');
+            chrome.tabs.create({ url: chrome.runtime.getURL('options.html') });
         });
 
         // Botón para ver estadísticas

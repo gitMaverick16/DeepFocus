@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepFocus - Configuración</title>
+    <link rel="stylesheet" href="styles/options.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🎯</span>
+                <h1>DeepFocus</h1>
+            </div>
+            <p class="subtitle">Configuración</p>
+        </header>
+
+        <main class="main-content">
+            <div class="section">
+                <h2>Sitios Bloqueados</h2>
+                <p class="section-description">
+                    Gestiona los sitios que están actualmente bloqueados por DeepFocus.
+                </p>
+
+                <div class="add-site-section">
+                    <div class="input-group">
+                        <input type="text" id="new-site-input" placeholder="ejemplo.com" class="site-input">
+                        <button id="add-site-btn" class="btn btn-primary">
+                            <span class="btn-icon">➕</span>
+                            Agregar Sitio
+                        </button>
+                    </div>
+                    <p class="input-hint">Ingresa solo el dominio (sin http:// o www)</p>
+                </div>
+
+                <div class="blocked-sites-list">
+                    <div class="list-header">
+                        <span class="site-count" id="site-count">0 sitios bloqueados</span>
+                        <button id="clear-all-btn" class="btn btn-danger btn-small">
+                            Limpiar Todo
+                        </button>
+                    </div>
+                    <div class="sites-container" id="sites-container">
+                        <!-- Los sitios bloqueados se cargarán aquí dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Estadísticas</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-blocks">0</div>
+                        <div class="stat-label">Sitios Bloqueados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-sessions">0</div>
+                        <div class="stat-label">Sesiones de Bloqueo</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-time">0h</div>
+                        <div class="stat-label">Tiempo Ahorrado</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Acciones Rápidas</h2>
+                <div class="quick-actions">
+                    <button id="export-data" class="btn btn-outline">
+                        <span class="btn-icon">📤</span>
+                        Exportar Datos
+                    </button>
+                    <button id="import-data" class="btn btn-outline">
+                        <span class="btn-icon">📥</span>
+                        Importar Datos
+                    </button>
+                    <button id="reset-data" class="btn btn-danger">
+                        <span class="btn-icon">🔄</span>
+                        Resetear Todo
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <button id="back-to-popup" class="btn btn-secondary">
+                <span class="btn-icon">←</span>
+                Volver al Popup
+            </button>
+        </footer>
+    </div>
+
+    <!-- Modal para confirmar eliminación -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <h3>Confirmar Eliminación</h3>
+            <p id="confirm-message">¿Estás seguro de que quieres eliminar este sitio?</p>
+            <div class="modal-actions">
+                <button id="confirm-yes" class="btn btn-danger">Sí, Eliminar</button>
+                <button id="confirm-no" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="utils/storage.js"></script>
+    <script src="options.js"></script>
+</body>
+</html> 
