@@ -101,7 +101,19 @@ class DeepFocusPopup {
                 
                 this.isBlocked = true;
                 this.updateUI();
-                this.showMessage('Sitio bloqueado exitosamente', 'success');
+                this.showMessage('Sitio bloqueado exitosamente. Refrescando página...', 'success');
+                
+                // Refrescar la página actual después de un breve delay
+                setTimeout(async () => {
+                    try {
+                        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+                        if (tab) {
+                            await chrome.tabs.reload(tab.id);
+                        }
+                    } catch (error) {
+                        console.error('Error al refrescar la página:', error);
+                    }
+                }, 1500);
             }
         } catch (error) {
             console.error('Error al bloquear sitio:', error);
