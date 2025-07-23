@@ -16,11 +16,6 @@ class DeepFocusBlocked {
             window.history.back();
         });
 
-        // Botón para desbloquear sitio
-        document.getElementById('unblock-site').addEventListener('click', () => {
-            this.unblockCurrentSite();
-        });
-
         // Botón para abrir opciones (próximamente)
         document.getElementById('open-options').addEventListener('click', () => {
             this.showMessage('Página de configuración próximamente', 'info');
@@ -58,55 +53,7 @@ class DeepFocusBlocked {
         document.getElementById('motivational-text').textContent = randomText;
     }
 
-    async unblockCurrentSite() {
-        try {
-            // Obtener la URL de la página anterior (el sitio que se intentó bloquear)
-            const referrer = document.referrer;
-            let domain = '';
-            
-            if (referrer) {
-                try {
-                    const url = new URL(referrer);
-                    domain = url.hostname;
-                } catch (error) {
-                    console.error('Error al parsear URL:', error);
-                }
-            }
 
-            if (!domain) {
-                this.showMessage('No se pudo identificar el sitio a desbloquear', 'error');
-                return;
-            }
-
-            // Obtener sitios bloqueados actuales
-            const result = await chrome.storage.local.get(['blockedSites']);
-            const blockedSites = result.blockedSites || [];
-
-            // Remover el sitio de la lista
-            const updatedBlockedSites = blockedSites.filter(site => site !== domain);
-            
-            // Guardar en storage
-            await chrome.storage.local.set({ blockedSites: updatedBlockedSites });
-            
-            // Actualizar estadísticas
-            await this.updateStats('sitesUnblocked', 1);
-            
-            this.showMessage('Sitio desbloqueado exitosamente', 'success');
-            
-            // Redirigir al sitio desbloqueado después de un breve delay
-            setTimeout(() => {
-                if (referrer) {
-                    window.location.href = referrer;
-                } else {
-                    window.history.back();
-                }
-            }, 1500);
-            
-        } catch (error) {
-            console.error('Error al desbloquear sitio:', error);
-            this.showMessage('Error al desbloquear el sitio', 'error');
-        }
-    }
 
     async updateStats(key, increment = 1) {
         try {

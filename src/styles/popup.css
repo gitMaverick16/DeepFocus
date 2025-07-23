@@ -98,6 +98,10 @@ body {
     color: #28a745;
 }
 
+.site-status.blocked-page {
+    color: #667eea;
+}
+
 /* Botones */
 .actions {
     margin-bottom: 20px;

@@ -22,16 +22,21 @@ class DeepFocusPopup {
                 this.currentUrl = tab.url;
                 this.currentDomain = this.extractDomain(tab.url);
                 
+                // Verificar si estamos en la página de bloqueo
+                this.isBlockedPage = this.isBlockedPage(tab.url);
+                
                 // Verificar si el sitio está bloqueado
                 await this.checkIfBlocked();
             } else {
                 this.currentUrl = 'No disponible';
                 this.currentDomain = '';
+                this.isBlockedPage = false;
             }
         } catch (error) {
             console.error('Error al cargar la pestaña actual:', error);
             this.currentUrl = 'Error al cargar';
             this.currentDomain = '';
+            this.isBlockedPage = false;
         }
     }
 
@@ -41,6 +46,15 @@ class DeepFocusPopup {
             return urlObj.hostname;
         } catch (error) {
             return '';
+        }
+    }
+
+    isBlockedPage(url) {
+        try {
+            const urlObj = new URL(url);
+            return urlObj.pathname.includes('blocked.html');
+        } catch (error) {
+            return false;
         }
     }
 
@@ -154,7 +168,11 @@ class DeepFocusPopup {
 
         // Actualizar estado del sitio
         const statusElement = document.getElementById('site-status');
-        if (this.isBlocked) {
+        
+        if (this.isBlockedPage) {
+            statusElement.textContent = '🎯 Página de Bloqueo';
+            statusElement.className = 'site-status blocked-page';
+        } else if (this.isBlocked) {
             statusElement.textContent = '🚫 Bloqueado';
             statusElement.className = 'site-status blocked';
         } else {
@@ -166,7 +184,11 @@ class DeepFocusPopup {
         const blockButton = document.getElementById('block-site');
         const unblockButton = document.getElementById('unblock-site');
 
-        if (this.isBlocked) {
+        if (this.isBlockedPage) {
+            // En la página de bloqueo, ocultar ambos botones
+            blockButton.style.display = 'none';
+            unblockButton.style.display = 'none';
+        } else if (this.isBlocked) {
             blockButton.style.display = 'none';
             unblockButton.style.display = 'flex';
         } else {
